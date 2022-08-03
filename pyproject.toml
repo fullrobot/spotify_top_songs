@@ -1,0 +1,78 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "python_template"
+version = "0.1.0"
+description = ""
+authors = ["Adam Gleason <adam.g.gleason@gmail.com>"]
+maintainers = ["Adam Gleason <adam.g.gleason@gmail.com>"]
+license = "Proprietary"
+readme = "READEME.md"
+homepage = ""
+repository = ""
+keywords = ["python"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+black = "^22.6.0"
+pre-commit = "^2.20.0"
+mypy = "^0.971"
+isort = "^5.10.1"
+pylint = "^2.14.5"
+bumpver = "^2022.1118"
+pytest = "^7.1.2"
+
+[tool.black]
+line-length = 120
+include = '\.py?$'
+extend-exclude = '''
+/(
+    \.git
+    | .*__init__py$
+)/
+'''
+
+[tool.isort]
+line_length = 120
+profile = "black"
+multi_line_output = 3
+combine_as_imports = true
+
+[tool.mypy]
+python_version = 3.10
+check_untyped_defs = true
+ignore_errors = false
+ignore_missing_imports = true
+strict_optional = true
+warn_usued_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.MASTER]
+fail-under = '10.0'
+ignore = '.git, __init__py'
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = '''import-error,
+    missing-module-docstring,
+    missing-function-docstring'''
+
+[tool.bumpver]
+current_version = "0.1.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "Bump Version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
+"src/__version__.py" = ['__version__ = "{version}"']
